@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import ShowValues from './ShowValues';
 import Input from './Input';
 import {formatTime, toSeconds, validateInput} from '../utils';
@@ -174,6 +180,12 @@ const HIITTimer = () => {
                 />
               </View>
             </View>
+            <View style={[styles.timeSection, styles.timeSectionRoundsLabel]}>
+              <View style={styles.timeSelectContainer}>
+                <Text>Label</Text>
+                <TextInput value="FFFF" />
+              </View>
+            </View>
           </>
         )}
       </View>
@@ -252,11 +264,14 @@ const styles = StyleSheet.create({
   timeSectionRoundsDetail: {
     backgroundColor: 'goldenrod',
   },
+  timeSectionRoundsLabel: {
+    backgroundColor: 'lightblue',
+  },
   timeSelectContainer: {
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
-    maxHeight: 90,
+    maxHeight: 75,
     width: '90%',
     justifyContent: 'center',
     alignItems: 'center',

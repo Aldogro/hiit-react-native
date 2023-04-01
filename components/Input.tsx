@@ -47,13 +47,12 @@ const Input = ({
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    maxHeight: 110,
+    maxHeight: 70,
     justifyContent: 'center',
     alignItems: 'center',
   },
   inputWrapper: {
-    flex: 1,
-    maxHeight: 100,
+    maxHeight: 30,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -61,15 +60,15 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: 'transparent',
     maxHeight: 60,
-    fontSize: 30,
+    fontSize: 15,
     textAlign: 'center',
   },
   button: {
     flex: 1,
     padding: 10,
-    fontSize: 30,
-    maxHeight: 40,
-    maxWidth: 40,
+    fontSize: 15,
+    maxHeight: 30,
+    maxWidth: 30,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
