@@ -1,9 +1,14 @@
 export const formatTime = (time: number) => {
-  let minutes = Math.floor(time / 60);
+  let hours = Math.floor(time / 60 / 60);
+  let minutes = Math.floor((time / 60) % 60);
   let seconds = time % 60;
-  return `${minutes < 10 && minutes > -1 ? '0' : ''}${minutes}:${
+  const _time = `${minutes < 10 && minutes > -1 ? '0' : ''}${minutes}:${
     seconds < 10 && seconds > -1 ? '0' : ''
   }${seconds}`;
+  if (hours > 0) {
+    return `${hours < 10 && hours > -1 ? '0' : ''}${hours}:${_time}`;
+  }
+  return _time;
 };
 
 export const toSeconds = (

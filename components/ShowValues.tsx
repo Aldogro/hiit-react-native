@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
+import {ShowValuesStyles as styles} from '../Styles';
 
 type ShowValuesProps = {
   formatTime: (time: number) => string;
@@ -43,48 +44,5 @@ const ShowValues = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 30,
-  },
-  timerContainer: {
-    maxHeight: 400,
-  },
-  timer: {
-    fontSize: 30,
-  },
-  roundTimerWrapper: {
-    minWidth: '90%',
-    justifyContent: 'center',
-    borderRadius: 20,
-    alignItems: 'center',
-    padding: 20,
-    marginTop: 15,
-    marginBottom: 15,
-  },
-  workTime: {
-    backgroundColor: 'tomato',
-  },
-  restTime: {
-    backgroundColor: 'teal',
-  },
-  roundTimer: {
-    fontSize: 100,
-  },
-  roundsContainer: {
-    maxHeight: 80,
-    marginBottom: 10,
-  },
-  rounds: {
-    fontSize: 50,
-  },
-});
 
 export default ShowValues;

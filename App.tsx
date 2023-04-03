@@ -5,39 +5,32 @@
  * @format
  */
 
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {createContext, useReducer} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 
-import Main from './components/Main';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import DisplayScreen from './screens/Display';
+import FormScreen from './screens/Form';
+import {routes} from './utils/constants';
+import {initialState, reducer} from './reducer';
+
+const Stack = createNativeStackNavigator();
+
+export const TrainingContext = createContext<any>({});
 
 function App(): JSX.Element {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <View style={styles.mainWrapper}>
-      <Main />
-    </View>
+    <TrainingContext.Provider value={{state, dispatch}}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name={routes.FORM} component={FormScreen} />
+          <Stack.Screen name={routes.TRAINING} component={DisplayScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </TrainingContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  mainWrapper: {
-    flex: 1,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
