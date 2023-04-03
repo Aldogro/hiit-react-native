@@ -102,8 +102,9 @@ const MainComponent = () => {
         </View>
       ) : (
         <View>
-          {data.length === 0 && <Text>Add some rounds first</Text>}
-          {data.length > 0 && (
+          {data.length === 0 ||
+            (totalTime === 0 && <Text>Add some rounds first</Text>)}
+          {data.length > 0 && totalTime > 0 && (
             <Display
               label={data[current].label}
               totalTime={totalTime}

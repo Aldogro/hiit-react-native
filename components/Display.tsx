@@ -46,8 +46,14 @@ const Display = ({
         </Text>
       </View>
       <View style={styles.actionsContainer}>
-        <TouchableOpacity onPress={() => setIsActive(!isActive)}>
-          <Text style={[styles.actionButton, styles.toggle]}>
+        <TouchableOpacity
+          onPress={() => setIsActive(!isActive)}
+          disabled={totalTime < 1}>
+          <Text
+            style={[
+              styles.actionButton,
+              totalTime > 0 ? styles.toggle : styles.disabled,
+            ]}>
             {isActive ? 'Pause' : 'Start'}
           </Text>
         </TouchableOpacity>

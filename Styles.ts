@@ -91,6 +91,11 @@ export const DisplayStyles = StyleSheet.create({
     borderColor: 'tomato',
     backgroundColor: '#ff634744',
   },
+  disabled: {
+    backgroundColor: '#8080808f',
+    borderColor: '#acacac8f',
+    color: '#acacac8f',
+  },
 });
 
 export const InputStyles = StyleSheet.create({
