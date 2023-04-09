@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {TrainingContext} from '../App';
 import {MainStyles as styles} from '../Styles';
 import Display from './Display';
+import {playSound} from '../utils';
 
 export type RoundsDataType = {
   label: string;
@@ -40,9 +41,11 @@ const MainComponent = () => {
       if (roundsLeft >= 1 && isWorkTime) {
         setTimeLeft(data[current].restTime);
         setIsWorkTime(false);
+        playSound(`${state.selectedSoundSet}_round`);
       }
       if (!isWorkTime) {
         if (roundsLeft > 1) {
+          playSound(`${state.selectedSoundSet}_round`);
           setTimeLeft(data[current].workTime);
           setIsWorkTime(true);
           setRoundsLeft(roundsLeft - 1);
@@ -53,6 +56,7 @@ const MainComponent = () => {
             setExerciseComplete(true);
             clearInterval(timer);
             setTimer(null);
+            playSound(`${state.selectedSoundSet}_end`);
             return;
           }
           // All rounds of current exercise completed, move to next exercise
@@ -60,6 +64,7 @@ const MainComponent = () => {
           setIsWorkTime(true);
           setTimeLeft(data[current + 1].workTime);
           setRoundsLeft(data[current + 1].rounds);
+          playSound(`${state.selectedSoundSet}_end`);
         }
       }
     }
@@ -96,9 +101,11 @@ const MainComponent = () => {
   return (
     <View style={[styles.container]}>
       {exerciseComplete ? (
-        <View>
-          <Text>Exercise Complete!!</Text>
-          <Button title="Reset" onPress={reset} />
+        <View style={styles.containerComplete}>
+          <Text style={styles.textComplete}>Exercise Complete!!</Text>
+          <TouchableOpacity onPress={reset}>
+            <Text style={[styles.actionButton, styles.reset]}>Reset</Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <View>

@@ -11,10 +11,14 @@ export type ActionTypes = {
 
 export type TrainingSessionState = {
   trainingSession: RoundsDataType[];
+  selectedTrainingSession: RoundsDataType[];
+  selectedSoundSet: string;
 };
 
 export const initialState: TrainingSessionState = {
   trainingSession: [],
+  selectedTrainingSession: [],
+  selectedSoundSet: 'sport_whistle',
 };
 
 export const reducer = (

@@ -1,3 +1,5 @@
+import SoundPlayer from 'react-native-sound-player';
+
 export const formatTime = (time: number) => {
   let hours = Math.floor(time / 60 / 60);
   let minutes = Math.floor((time / 60) % 60);
@@ -38,4 +40,12 @@ export const validateInput = (
     setValue(temp);
   }
   return Number(temp);
+};
+
+export const playSound = (name: string) => {
+  try {
+    SoundPlayer.playSoundFile(name, 'mp3');
+  } catch (e) {
+    console.log(`cannot play the sound file ${name}`, e);
+  }
 };

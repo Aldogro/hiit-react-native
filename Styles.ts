@@ -13,6 +13,35 @@ export const MainStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  containerComplete: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+  },
+  textComplete: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  actionButton: {
+    flex: 1,
+    minWidth: 188,
+    maxHeight: 60,
+    fontSize: 18,
+    textAlign: 'center',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  reset: {
+    color: 'tomato',
+    borderColor: 'tomato',
+    backgroundColor: '#ff634744',
+  },
 });
 
 export const DisplayStyles = StyleSheet.create({
