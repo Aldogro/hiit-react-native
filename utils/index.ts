@@ -1,4 +1,5 @@
 import SoundPlayer from 'react-native-sound-player';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const formatTime = (time: number) => {
   let hours = Math.floor(time / 60 / 60);
@@ -47,5 +48,34 @@ export const playSound = (name: string) => {
     SoundPlayer.playSoundFile(name, 'mp3');
   } catch (e) {
     console.log(`cannot play the sound file ${name}`, e);
+  }
+};
+
+export const storeData = async (key: string, value: any) => {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(value));
+    console.log('Data Stored successfully');
+  } catch (error) {
+    console.error('Failed to store data', error);
+  }
+};
+
+export const retrieveData = async (key: string) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      return JSON.parse(value);
+    }
+    return null;
+  } catch (error) {
+    console.error('Failed to retrieve data: ', error);
+  }
+};
+
+export const removeData = async (key: string) => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (error) {
+    console.error('Failed to remove data: ', error);
   }
 };

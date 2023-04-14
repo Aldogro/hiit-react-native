@@ -211,6 +211,15 @@ export const FormStyles = StyleSheet.create({
     flex: 1,
     paddingBottom: 20,
   },
+  sessionTrainingTitle: {
+    borderWidth: 1,
+    borderColor: 'white',
+    margin: 8,
+    textAlign: 'center',
+    fontSize: 20,
+    borderRadius: 12,
+    padding: 12,
+  },
   button: {
     flex: 1,
     minWidth: 188,
@@ -242,5 +251,41 @@ export const FormStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+});
+
+export const SettingsStyles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  soundsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    maxHeight: 400,
+    width: '90%',
+    marginTop: 30,
+    gap: 20,
+  },
+  soundsRow: {
+    flex: 1,
+    gap: 20,
+    justifyContent: 'center',
+    height: 200,
+  },
+  soundsButton: {
+    textAlign: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 12,
+    color: 'gray',
+    paddingTop: 28,
+    fontSize: 14,
+    minHeight: 80,
+  },
+  active: {
+    backgroundColor: '#16611681',
+    borderColor: '#35e635',
+    color: '#35e635',
   },
 });

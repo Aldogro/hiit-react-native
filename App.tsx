@@ -5,32 +5,79 @@
  * @format
  */
 
-import React, {createContext, useReducer} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import TrainingProvider from './TrainingProvider';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DisplayScreen from './screens/Display';
 import FormScreen from './screens/Form';
 import {routes} from './utils/constants';
-import {initialState, reducer} from './reducer';
+import SettingsScreen from './screens/Settings';
+import TrainingsListScreen from './screens/TrainingList';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export const TrainingContext = createContext<any>({});
-
-function App(): JSX.Element {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+const App = (): JSX.Element => {
   return (
-    <TrainingContext.Provider value={{state, dispatch}}>
+    <TrainingProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name={routes.FORM} component={FormScreen} />
-          <Stack.Screen name={routes.TRAINING} component={DisplayScreen} />
-        </Stack.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarActiveTintColor: 'white',
+            tabBarInactiveTintColor: 'gray',
+            tabBarLabelStyle: {
+              fontSize: 16,
+            },
+            tabBarStyle: {
+              backgroundColor: 'black',
+              height: 90,
+            },
+          }}>
+          <Tab.Screen
+            name={routes.TRAININGS_LIST}
+            component={TrainingsListScreen}
+            options={{
+              tabBarLabel: '',
+              // eslint-disable-next-line react/no-unstable-nested-components
+              tabBarIcon: ({color}) => (
+                <Icon name="clipboard-list" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={routes.FORM}
+            component={FormScreen}
+            options={{
+              tabBarLabel: '',
+              // eslint-disable-next-line react/no-unstable-nested-components
+              tabBarIcon: ({color}) => (
+                <Icon name="running" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={routes.SETTINGS}
+            component={SettingsScreen}
+            options={{
+              tabBarLabel: '',
+              // eslint-disable-next-line react/no-unstable-nested-components
+              tabBarIcon: ({color}) => (
+                <Icon name="cog" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={routes.TRAINING}
+            component={DisplayScreen}
+            options={{tabBarButton: () => null}}
+          />
+        </Tab.Navigator>
       </NavigationContainer>
-    </TrainingContext.Provider>
+    </TrainingProvider>
   );
-}
+};
 
 export default App;

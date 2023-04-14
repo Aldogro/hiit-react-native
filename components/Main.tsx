@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {TrainingContext} from '../App';
+import {TrainingContext} from '../TrainingProvider';
 import {MainStyles as styles} from '../Styles';
 import Display from './Display';
 import {playSound} from '../utils';
@@ -14,7 +14,7 @@ export type RoundsDataType = {
 
 const MainComponent = () => {
   const {state} = useContext(TrainingContext);
-  const data: RoundsDataType[] = state.trainingSession || [];
+  const data: RoundsDataType[] = state.selectedTrainingSession || [];
   const [timer, setTimer] = useState<any>(null);
   const [isActive, setIsActive] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -34,7 +34,7 @@ const MainComponent = () => {
     );
     return num;
   };
-  const [totalTime, setTotalTime] = useState(getTotalTime() || 0);
+  const [totalTime, setTotalTime] = useState(getTotalTime());
 
   useEffect(() => {
     if (timeLeft === 0) {
