@@ -10,6 +10,8 @@ export const MainStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2c2c2c',
+    gap: 12,
+    paddingTop: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -222,7 +224,7 @@ export const FormStyles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    minWidth: 188,
+    minWidth: 390,
     textAlign: 'center',
     color: 'goldenrod',
     borderColor: 'goldenrod',
@@ -288,4 +290,21 @@ export const SettingsStyles = StyleSheet.create({
     borderColor: '#35e635',
     color: '#35e635',
   },
+});
+
+export const TrainingListStyles = StyleSheet.create({
+  itemWrapper: {
+    flex: 1,
+    width: '90%',
+    gap: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 12,
+  },
+  button: {
+    marginLeft: 'auto',
+  },
+  start: {},
+  disabled: {},
 });

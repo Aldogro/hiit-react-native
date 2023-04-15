@@ -54,6 +54,17 @@ const App = (): JSX.Element => {
               tabBarLabel: '',
               // eslint-disable-next-line react/no-unstable-nested-components
               tabBarIcon: ({color}) => (
+                <Icon name="edit" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={routes.TRAINING}
+            component={DisplayScreen}
+            options={{
+              tabBarLabel: '',
+              // eslint-disable-next-line react/no-unstable-nested-components
+              tabBarIcon: ({color}) => (
                 <Icon name="running" size={24} color={color} />
               ),
             }}
@@ -69,11 +80,11 @@ const App = (): JSX.Element => {
               ),
             }}
           />
-          <Tab.Screen
+          {/* <Tab.Screen
             name={routes.TRAINING}
             component={DisplayScreen}
             options={{tabBarButton: () => null}}
-          />
+          /> */}
         </Tab.Navigator>
       </NavigationContainer>
     </TrainingProvider>

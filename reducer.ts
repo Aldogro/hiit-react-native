@@ -70,7 +70,7 @@ export const reducer = (
     case Actions.SAVE_TRAINING_SESSION:
       const savedTrainingSession = {
         ...state,
-        trainingSession: action.payload,
+        selectedTrainingSession: action.payload,
       };
       storeData('appState', savedTrainingSession);
       return savedTrainingSession;
@@ -89,12 +89,14 @@ export const reducer = (
       storeData('appState', selectedSoundSet);
       return selectedSoundSet;
     case Actions.ADD_TRAINING_SESSION:
+      const upsertedTrainingSession = {
+        savedTrainingSessions: (state.savedTrainingSessions[
+          action.payload.name
+        ] = action.payload.session),
+      };
       const addedTrainingSession = {
         ...state,
-        savedTrainingSessions: {
-          ...state.savedTrainingSessions,
-          [action.payload.name]: action.payload.session,
-        },
+        savedTrainingSession: upsertedTrainingSession,
       };
       storeData('appState', addedTrainingSession);
       return addedTrainingSession;

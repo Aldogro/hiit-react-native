@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {routes} from '../utils/constants';
 import {DarkBackground} from '../Styles';
 import {RoundsDataType} from '../components/Main';
 import FormItem from '../components/FormItem';
@@ -14,11 +13,11 @@ import {FormStyles as styles} from '../Styles';
 import {TrainingContext} from '../TrainingProvider';
 import {Actions} from '../reducer';
 
-const FormScreen = ({navigation}: {navigation: any}) => {
+const FormScreen = () => {
   const {state, dispatch} = useContext(TrainingContext);
   const [trainingSessionName, setTrainingSessionName] = useState('Change Me');
   const [formItems, setFormItems] = useState<RoundsDataType[]>(
-    state.trainingSession,
+    state.selectedTrainingSession,
   );
 
   const handleAddFormItems = () => {
@@ -88,23 +87,6 @@ const FormScreen = ({navigation}: {navigation: any}) => {
                 formItems.length > 0 ? styles.start : styles.disabled,
               ]}>
               Save Training
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            disabled={formItems.length <= 0}
-            onPress={() => {
-              dispatch({
-                type: Actions.SAVE_TRAINING_SESSION,
-                payload: formItems,
-              });
-              navigation.navigate(routes.TRAINING);
-            }}>
-            <Text
-              style={[
-                styles.button,
-                formItems.length > 0 ? styles.start : styles.disabled,
-              ]}>
-              Start
             </Text>
           </TouchableOpacity>
         </View>
