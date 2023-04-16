@@ -14,7 +14,9 @@ export type RoundsDataType = {
 
 const MainComponent = () => {
   const {state} = useContext(TrainingContext);
-  const data: RoundsDataType[] = state.selectedTrainingSession || [];
+  const [data, setData] = useState<RoundsDataType[]>(
+    state.savedTrainingSessions[state.selectedTrainingSession] || [],
+  );
   const [timer, setTimer] = useState<any>(null);
   const [isActive, setIsActive] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -36,7 +38,33 @@ const MainComponent = () => {
   };
   const [totalTime, setTotalTime] = useState(getTotalTime());
 
+  const reset = () => {
+    setCurrent(0);
+    setExerciseComplete(false);
+    setIsWorkTime(true);
+    setTotalTime(getTotalTime());
+    setRoundsLeft(data[current].rounds);
+    setTimeLeft(data[current].workTime);
+    setIsActive(false);
+  };
+
   useEffect(() => {
+    setData(state.savedTrainingSessions[state.selectedTrainingSession]);
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, state]);
+
+  useEffect(() => {
+    const halfWayWork =
+      Number((data[current].workTime / 2).toFixed(0)) === timeLeft;
+    const halfWayRest =
+      Number((data[current].restTime / 2).toFixed(0)) === timeLeft;
+    if (isWorkTime && halfWayWork) {
+      playSound('half_way');
+    }
+    if (!isWorkTime && halfWayRest) {
+      playSound('half_way');
+    }
     if (timeLeft === 0) {
       if (roundsLeft >= 1 && isWorkTime) {
         setTimeLeft(data[current].restTime);
@@ -88,16 +116,6 @@ const MainComponent = () => {
     }
   }, [isActive, timeLeft, timer]);
 
-  const reset = () => {
-    setCurrent(0);
-    setExerciseComplete(false);
-    setIsWorkTime(true);
-    setTotalTime(getTotalTime());
-    setRoundsLeft(data[current].rounds);
-    setTimeLeft(data[current].workTime);
-    setIsActive(false);
-  };
-
   return (
     <View style={[styles.container]}>
       {exerciseComplete ? (
@@ -113,6 +131,7 @@ const MainComponent = () => {
             (totalTime === 0 && <Text>Add some rounds first</Text>)}
           {data.length > 0 && totalTime > 0 && (
             <Display
+              name={state.selectedTrainingSession}
               label={data[current].label}
               totalTime={totalTime}
               isWorkTime={isWorkTime}

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {validateInput} from '../utils';
 import LabeledInput from './LabeledInput';
 import {RoundsDataType} from './Main';
+import {FormItemStyles as styles} from '../Styles';
 
 const FormItem = ({
   data,
@@ -16,8 +17,8 @@ const FormItem = ({
   modifyItem: (index: number, data: RoundsDataType) => void;
 }) => {
   const [label, setLabel] = useState(data.label);
-  const [workTime, setWorkTime] = useState<number>(data.workTime);
-  const [restTime, setRestTime] = useState<number>(data.restTime);
+  const [workTime] = useState<number>(data.workTime);
+  const [restTime] = useState<number>(data.restTime);
   const [rounds, setRounds] = useState<number>(data.rounds);
 
   const [workMin, setWorkMin] = useState(Math.floor(workTime / 60));
@@ -26,9 +27,14 @@ const FormItem = ({
   const [restSec, setRestSec] = useState(restTime % 60);
 
   useEffect(() => {
-    setWorkTime(Number(workMin) * 60 + Number(workSec));
-    setRestTime(Number(restMin) * 60 + Number(restSec));
-    const _data: RoundsDataType = {label, workTime, restTime, rounds};
+    const wTime = Number(workMin) * 60 + Number(workSec);
+    const rTime = Number(restMin) * 60 + Number(restSec);
+    const _data: RoundsDataType = {
+      label,
+      workTime: wTime,
+      restTime: rTime,
+      rounds,
+    };
     modifyItem(index, _data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [label, workMin, workSec, restMin, restSec, rounds, index]);
@@ -78,30 +84,5 @@ const FormItem = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 12,
-    padding: 12,
-    margin: 8,
-  },
-  halfScreen: {
-    flex: 1,
-    flexDirection: 'row',
-    gap: 10,
-  },
-  deleteFormItem: {
-    alignSelf: 'flex-end',
-    marginTop: 30,
-    color: 'tomato',
-    borderColor: 'tomato',
-    backgroundColor: '#ff634744',
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 12,
-  },
-});
 
 export default FormItem;

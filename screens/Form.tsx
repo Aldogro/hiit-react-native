@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   ScrollView,
   Text,
@@ -12,13 +12,21 @@ import FormItem from '../components/FormItem';
 import {FormStyles as styles} from '../Styles';
 import {TrainingContext} from '../TrainingProvider';
 import {Actions} from '../reducer';
+import {routes} from '../utils/constants';
 
-const FormScreen = () => {
+const FormScreen = ({navigation}: any) => {
   const {state, dispatch} = useContext(TrainingContext);
-  const [trainingSessionName, setTrainingSessionName] = useState('Change Me');
-  const [formItems, setFormItems] = useState<RoundsDataType[]>(
+  const [trainingSessionName, setTrainingSessionName] = useState(
     state.selectedTrainingSession,
   );
+  const [formItems, setFormItems] = useState<RoundsDataType[]>(
+    state.savedTrainingSessions?.[state.selectedTrainingSession] || [],
+  );
+
+  useEffect(() => {
+    setFormItems(state.savedTrainingSessions[state.selectedTrainingSession]);
+    setTrainingSessionName(state.selectedTrainingSession);
+  }, [state]);
 
   const handleAddFormItems = () => {
     const item: RoundsDataType = {
@@ -27,7 +35,7 @@ const FormScreen = () => {
       restTime: 0,
       rounds: 0,
     };
-    setFormItems([...formItems, item]);
+    setFormItems([...(formItems || []), item]);
   };
 
   const handleAddSessionsInStore = () => {
@@ -38,6 +46,7 @@ const FormScreen = () => {
         session: formItems,
       },
     });
+    navigation.navigate(routes.TRAININGS_LIST);
   };
 
   const handleRemoveFormItem = (index: number) => {
@@ -61,15 +70,16 @@ const FormScreen = () => {
           value={trainingSessionName}
           onChangeText={setTrainingSessionName}
         />
-        {formItems.map((formItem: RoundsDataType, index: number) => (
-          <FormItem
-            data={formItem}
-            index={index}
-            removeItem={handleRemoveFormItem}
-            modifyItem={handleFormItemChange}
-            key={formItem.label + index}
-          />
-        ))}
+        {formItems &&
+          formItems.map((formItem: RoundsDataType, index: number) => (
+            <FormItem
+              data={formItem}
+              index={index}
+              removeItem={handleRemoveFormItem}
+              modifyItem={handleFormItemChange}
+              key={formItem.label + index}
+            />
+          ))}
         <View style={styles.actionsWrapper}>
           <TouchableOpacity onPress={handleAddFormItems}>
             <Text style={[styles.button, styles.addExercise]}>
@@ -80,11 +90,15 @@ const FormScreen = () => {
         <View style={styles.actionsWrapper}>
           <TouchableOpacity
             onPress={handleAddSessionsInStore}
-            disabled={formItems.length <= 0}>
+            disabled={
+              formItems && formItems.length > 0 && formItems.length <= 0
+            }>
             <Text
               style={[
                 styles.button,
-                formItems.length > 0 ? styles.start : styles.disabled,
+                formItems && formItems.length > 0
+                  ? styles.start
+                  : styles.disabled,
               ]}>
               Save Training
             </Text>

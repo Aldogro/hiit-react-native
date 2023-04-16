@@ -1,5 +1,4 @@
 import {RoundsDataType} from './components/Main';
-import {storeData} from './utils';
 
 export enum Actions {
   LOAD_SAVED_DATA,
@@ -18,11 +17,11 @@ export type ActionTypes =
     }
   | {
       type: Actions.SAVE_TRAINING_SESSION;
-      payload: RoundsDataType[];
+      payload: string;
     }
   | {
       type: Actions.SET_SELECTED_TRAINING_SESSION;
-      payload: RoundsDataType[];
+      payload: string;
     }
   | {
       type: Actions.SET_SELECTED_SOUND_SET;
@@ -45,15 +44,13 @@ export type TrainingSessionState = {
   savedTrainingSessions: {
     [key: string]: RoundsDataType[];
   };
-  trainingSession: RoundsDataType[];
-  selectedTrainingSession: RoundsDataType[];
+  selectedTrainingSession: string;
   selectedSoundSet: string;
 };
 
 export const initialState: TrainingSessionState = {
   savedTrainingSessions: {},
-  trainingSession: [],
-  selectedTrainingSession: [],
+  selectedTrainingSession: '',
   selectedSoundSet: 'sport_whistle',
 };
 
@@ -72,21 +69,18 @@ export const reducer = (
         ...state,
         selectedTrainingSession: action.payload,
       };
-      storeData('appState', savedTrainingSession);
       return savedTrainingSession;
     case Actions.SET_SELECTED_TRAINING_SESSION:
       const selectedTrainingSession = {
         ...state,
         selectedTrainingSession: action.payload,
       };
-      storeData('appState', selectedTrainingSession);
       return selectedTrainingSession;
     case Actions.SET_SELECTED_SOUND_SET:
       const selectedSoundSet = {
         ...state,
         selectedSoundSet: action.payload,
       };
-      storeData('appState', selectedSoundSet);
       return selectedSoundSet;
     case Actions.ADD_TRAINING_SESSION:
       const upsertedTrainingSession = {
@@ -98,14 +92,13 @@ export const reducer = (
         ...state,
         savedTrainingSession: upsertedTrainingSession,
       };
-      storeData('appState', addedTrainingSession);
       return addedTrainingSession;
     case Actions.REMOVE_TRAINING_SESSION:
       delete state.savedTrainingSessions[action.payload];
       const removedTrainingSession = {
         ...state,
+        selectedTrainingSession: '',
       };
-      storeData('appState', removedTrainingSession);
       return removedTrainingSession;
     case Actions.UPDATE_STATE_FROM_STORAGE:
       return {...action.payload};

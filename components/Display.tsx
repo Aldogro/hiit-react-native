@@ -4,6 +4,7 @@ import {formatTime} from '../utils';
 import {DisplayStyles as styles} from '../Styles';
 
 type DisplayPropsType = {
+  name: string;
   label: string;
   totalTime: number;
   isWorkTime: boolean;
@@ -17,6 +18,7 @@ type DisplayPropsType = {
 };
 
 const Display = ({
+  name,
   label,
   totalTime,
   isWorkTime,
@@ -30,6 +32,7 @@ const Display = ({
 }: DisplayPropsType) => {
   return (
     <View style={styles.container}>
+      <Text style={styles.name}>{name}</Text>
       <Text style={styles.label}>{label}</Text>
       <Text style={styles.totalTime}>Total time: {formatTime(totalTime)}</Text>
       <View

@@ -11,7 +11,8 @@ export const MainStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2c2c2c',
     gap: 12,
-    paddingTop: 12,
+    paddingTop: 18,
+    paddingBottom: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -52,17 +53,19 @@ export const DisplayStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  name: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
   label: {
     minWidth: '100%',
     padding: 10,
     textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 25,
     marginBottom: 16,
   },
   totalTime: {
     padding: 10,
-    marginTop: -15,
   },
   roundWrapper: {
     flex: 1,
@@ -256,6 +259,63 @@ export const FormStyles = StyleSheet.create({
   },
 });
 
+export const FormItemStyles = StyleSheet.create({
+  container: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 12,
+    padding: 12,
+    margin: 8,
+  },
+  halfScreen: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 10,
+  },
+  deleteFormItem: {
+    alignSelf: 'flex-end',
+    marginTop: 30,
+    color: 'tomato',
+    borderColor: 'tomato',
+    backgroundColor: '#ff634744',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+  },
+});
+
+export const LabeledInputStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 7,
+  },
+  label: {
+    textAlign: 'center',
+  },
+  inputWrapper: {
+    flex: 1,
+    gap: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInput: {
+    flex: 1,
+    backgroundColor: '#444444',
+    borderRadius: 12,
+    textAlign: 'center',
+  },
+  iconButton: {
+    textAlign: 'center',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'white',
+    minWidth: 40,
+    borderRadius: 30,
+    fontSize: 14,
+  },
+});
+
 export const SettingsStyles = StyleSheet.create({
   title: {
     fontSize: 30,
@@ -297,14 +357,55 @@ export const TrainingListStyles = StyleSheet.create({
     flex: 1,
     width: '90%',
     gap: 12,
-    padding: 12,
+    padding: 20,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 12,
   },
-  button: {
-    marginLeft: 'auto',
+  actionsWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  start: {},
-  disabled: {},
+  button: {
+    borderWidth: 1,
+    borderColor: 'cyan',
+    padding: 12,
+    borderRadius: 8,
+    minWidth: 75,
+    textAlign: 'center',
+  },
+  start: {
+    backgroundColor: '#16611681',
+    borderColor: '#35e635',
+    color: '#35e635',
+  },
+  edit: {
+    backgroundColor: '#00FFFF44',
+    borderColor: '#00FFFF',
+    color: '#00FFFF',
+  },
+  delete: {
+    color: 'tomato',
+    borderColor: 'tomato',
+    backgroundColor: '#ff634744',
+  },
+  disabled: {
+    backgroundColor: '#8080808f',
+    borderColor: '#acacac8f',
+    color: '#acacac8f',
+  },
+  summary: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  summaryTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  summaryInfo: {
+    marginTop: 8,
+    fontSize: 17,
+  },
 });
