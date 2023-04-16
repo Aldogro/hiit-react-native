@@ -15,23 +15,23 @@ export type RoundsDataType = {
 const MainComponent = () => {
   const {state} = useContext(TrainingContext);
   const [data, setData] = useState<RoundsDataType[]>(
-    state.savedTrainingSessions[state.selectedTrainingSession] || [],
+    state.savedTrainingSessions?.[state.selectedTrainingSession] || [],
   );
   const [timer, setTimer] = useState<any>(null);
   const [isActive, setIsActive] = useState(false);
   const [current, setCurrent] = useState(0);
   const [timeLeft, setTimeLeft] = useState(
-    data.length ? data[current].workTime : 0,
+    data?.length ? data?.[current].workTime : 0,
   );
   const [roundsLeft, setRoundsLeft] = useState(
-    data.length ? data[current].rounds : 0,
+    data?.length ? data[current].rounds : 0,
   );
   const [isWorkTime, setIsWorkTime] = useState(true);
   const [exerciseComplete, setExerciseComplete] = useState(false);
 
   const getTotalTime = () => {
     let num = 0;
-    data.forEach(
+    data?.forEach(
       item => (num += (item.restTime + item.workTime) * item.rounds),
     );
     return num;
@@ -43,8 +43,8 @@ const MainComponent = () => {
     setExerciseComplete(false);
     setIsWorkTime(true);
     setTotalTime(getTotalTime());
-    setRoundsLeft(data[current].rounds);
-    setTimeLeft(data[current].workTime);
+    setRoundsLeft(data?.[current]?.rounds);
+    setTimeLeft(data?.[current]?.workTime);
     setIsActive(false);
   };
 
@@ -56,9 +56,9 @@ const MainComponent = () => {
 
   useEffect(() => {
     const halfWayWork =
-      Number((data[current].workTime / 2).toFixed(0)) === timeLeft;
+      Number((data?.[current]?.workTime / 2).toFixed(0)) === timeLeft;
     const halfWayRest =
-      Number((data[current].restTime / 2).toFixed(0)) === timeLeft;
+      Number((data?.[current]?.restTime / 2).toFixed(0)) === timeLeft;
     if (isWorkTime && halfWayWork) {
       playSound('half_way');
     }
@@ -127,9 +127,9 @@ const MainComponent = () => {
         </View>
       ) : (
         <View>
-          {data.length === 0 ||
+          {data?.length === 0 ||
             (totalTime === 0 && <Text>Add some rounds first</Text>)}
-          {data.length > 0 && totalTime > 0 && (
+          {data?.length > 0 && totalTime > 0 && (
             <Display
               name={state.selectedTrainingSession}
               label={data[current].label}

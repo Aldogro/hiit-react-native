@@ -26,6 +26,12 @@ const App = (): JSX.Element => {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            headerTitleStyle: {
+              color: 'white',
+            },
             tabBarActiveTintColor: 'white',
             tabBarInactiveTintColor: 'gray',
             tabBarLabelStyle: {
@@ -80,11 +86,6 @@ const App = (): JSX.Element => {
               ),
             }}
           />
-          {/* <Tab.Screen
-            name={routes.TRAINING}
-            component={DisplayScreen}
-            options={{tabBarButton: () => null}}
-          /> */}
         </Tab.Navigator>
       </NavigationContainer>
     </TrainingProvider>
