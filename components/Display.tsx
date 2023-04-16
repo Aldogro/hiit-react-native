@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {formatTime} from '../utils';
 import {DisplayStyles as styles} from '../Styles';
+import {TrainingContext} from '../TrainingProvider';
 
 type DisplayPropsType = {
   name: string;
@@ -30,22 +31,26 @@ const Display = ({
   setIsActive,
   reset,
 }: DisplayPropsType) => {
+  const {t} = useContext(TrainingContext);
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.label}>{label}</Text>
-      <Text style={styles.totalTime}>Total time: {formatTime(totalTime)}</Text>
+      <Text style={styles.totalTime}>
+        {t('training.totalTime')}: {formatTime(totalTime)}
+      </Text>
       <View
         style={[
           styles.roundWrapper,
           isWorkTime ? styles.isWorkTime : styles.isRestTime,
         ]}>
         <Text style={styles.timeLeftLabel}>
-          {!exerciseComplete && (isWorkTime ? 'Work!' : 'Rest!')}
+          {!exerciseComplete &&
+            (isWorkTime ? t('training.work!!') : t('training.rest'))}
         </Text>
         <Text style={styles.timeLeft}>{formatTime(timeLeft)}</Text>
         <Text style={styles.roundsLeft}>
-          Rounds: {roundsLeft} of {rounds}
+          {t('training.rounds')}: {roundsLeft} {t('training.of')} {rounds}
         </Text>
       </View>
       <View style={styles.actionsContainer}>
@@ -57,11 +62,13 @@ const Display = ({
               styles.actionButton,
               totalTime > 0 ? styles.toggle : styles.disabled,
             ]}>
-            {isActive ? 'Pause' : 'Start'}
+            {isActive ? t('training.pause') : t('training.start')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={reset}>
-          <Text style={[styles.actionButton, styles.reset]}>Reset</Text>
+          <Text style={[styles.actionButton, styles.reset]}>
+            {t('training.reset')}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

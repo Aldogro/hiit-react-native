@@ -318,22 +318,21 @@ export const LabeledInputStyles = StyleSheet.create({
 
 export const SettingsStyles = StyleSheet.create({
   title: {
+    marginTop: 40,
     fontSize: 30,
     fontWeight: 'bold',
   },
   soundsContainer: {
     flex: 1,
     flexDirection: 'row',
-    maxHeight: 400,
+    maxHeight: 250,
     width: '90%',
-    marginTop: 30,
     gap: 20,
   },
   soundsRow: {
     flex: 1,
     gap: 20,
-    justifyContent: 'center',
-    height: 200,
+    justifyContent: 'flex-start',
   },
   soundsButton: {
     textAlign: 'center',

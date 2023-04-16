@@ -13,7 +13,7 @@ export type RoundsDataType = {
 };
 
 const MainComponent = () => {
-  const {state} = useContext(TrainingContext);
+  const {state, t} = useContext(TrainingContext);
   const [data, setData] = useState<RoundsDataType[]>(
     state.savedTrainingSessions?.[state.selectedTrainingSession] || [],
   );
@@ -120,15 +120,19 @@ const MainComponent = () => {
     <View style={[styles.container]}>
       {exerciseComplete ? (
         <View style={styles.containerComplete}>
-          <Text style={styles.textComplete}>Exercise Complete!!</Text>
+          <Text style={styles.textComplete}>
+            {t('training.exerciseComplete')}
+          </Text>
           <TouchableOpacity onPress={reset}>
-            <Text style={[styles.actionButton, styles.reset]}>Reset</Text>
+            <Text style={[styles.actionButton, styles.reset]}>
+              {t('training.reset')}
+            </Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View>
           {data?.length === 0 ||
-            (totalTime === 0 && <Text>Add some rounds first</Text>)}
+            (totalTime === 0 && <Text>{t('training.addSomeRounds')}</Text>)}
           {data?.length > 0 && totalTime > 0 && (
             <Display
               name={state.selectedTrainingSession}

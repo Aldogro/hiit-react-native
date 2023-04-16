@@ -7,6 +7,7 @@ export enum Actions {
   REMOVE_TRAINING_SESSION,
   SET_SELECTED_TRAINING_SESSION,
   SET_SELECTED_SOUND_SET,
+  SET_SELECTED_LANGUAGE,
   UPDATE_STATE_FROM_STORAGE,
 }
 
@@ -28,6 +29,10 @@ export type ActionTypes =
       payload: string;
     }
   | {
+      type: Actions.SET_SELECTED_LANGUAGE;
+      payload: string;
+    }
+  | {
       type: Actions.ADD_TRAINING_SESSION;
       payload: {name: string; session: RoundsDataType[]};
     }
@@ -46,12 +51,14 @@ export type TrainingSessionState = {
   };
   selectedTrainingSession: string;
   selectedSoundSet: string;
+  selectedLanguage: string;
 };
 
 export const initialState: TrainingSessionState = {
   savedTrainingSessions: {},
   selectedTrainingSession: '',
   selectedSoundSet: 'sport_whistle',
+  selectedLanguage: 'sp',
 };
 
 export const reducer = (
@@ -82,6 +89,12 @@ export const reducer = (
         selectedSoundSet: action.payload,
       };
       return selectedSoundSet;
+    case Actions.SET_SELECTED_LANGUAGE:
+      const selectedLanguage = {
+        ...state,
+        selectedLanguage: action.payload,
+      };
+      return selectedLanguage;
     case Actions.ADD_TRAINING_SESSION:
       const upsertedTrainingSession = {
         savedTrainingSessions: (state.savedTrainingSessions[

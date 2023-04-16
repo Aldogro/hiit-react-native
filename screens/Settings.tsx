@@ -6,16 +6,24 @@ import {MainStyles, DarkBackground, SettingsStyles as styles} from '../Styles';
 import {soundNames} from '../utils/constants';
 
 const SettingsScreen = () => {
-  const {state, dispatch} = useContext(TrainingContext);
-  const {selectedSoundSet} = state;
+  const {state, dispatch, t} = useContext(TrainingContext);
+  const {selectedSoundSet, selectedLanguage} = state;
   const [soundSet, setSoundSet] = useState(selectedSoundSet || '');
+  const [language, setLanguage] = useState(selectedLanguage || 'eng');
 
   useEffect(() => {
     dispatch({type: Actions.SET_SELECTED_SOUND_SET, payload: soundSet});
-  }, [dispatch, soundSet]);
+    dispatch({type: Actions.SET_SELECTED_LANGUAGE, payload: language});
+  }, [dispatch, soundSet, language]);
 
-  const checkActiveStyle = (name: string) => {
+  const checkActiveSound = (name: string) => {
     if (name === state.selectedSoundSet) {
+      return styles.active;
+    }
+  };
+
+  const checkActiveLanguage = (name: string) => {
+    if (name === state.selectedLanguage) {
       return styles.active;
     }
   };
@@ -24,22 +32,15 @@ const SettingsScreen = () => {
 
   const soundsSetsTwo = [soundNames.sport_whistle, soundNames.cartoon_whistle];
 
-  const labelSoundNames = {
-    [soundNames.bells_small]: 'Small Bells',
-    [soundNames.bells_med]: 'Medium Bells',
-    [soundNames.sport_whistle]: 'Sports Whistle',
-    [soundNames.cartoon_whistle]: 'Cartoons Whistle',
-  };
-
   return (
     <View style={[DarkBackground.darkBackground, MainStyles.container]}>
-      <Text style={styles.title}>Sound Set</Text>
+      <Text style={styles.title}>{t('settings.soundSet')}</Text>
       <View style={styles.soundsContainer}>
         <View style={styles.soundsRow}>
           {soundsSetsOne.map(item => (
             <TouchableOpacity key={item} onPress={() => setSoundSet(item)}>
-              <Text style={[styles.soundsButton, checkActiveStyle(item)]}>
-                {labelSoundNames[item]}
+              <Text style={[styles.soundsButton, checkActiveSound(item)]}>
+                {t(`settings.${item}`)}
               </Text>
             </TouchableOpacity>
           ))}
@@ -47,11 +48,28 @@ const SettingsScreen = () => {
         <View style={styles.soundsRow}>
           {soundsSetsTwo.map(item => (
             <TouchableOpacity key={item} onPress={() => setSoundSet(item)}>
-              <Text style={[styles.soundsButton, checkActiveStyle(item)]}>
-                {labelSoundNames[item]}
+              <Text style={[styles.soundsButton, checkActiveSound(item)]}>
+                {t(`settings.${item}`)}
               </Text>
             </TouchableOpacity>
           ))}
+        </View>
+      </View>
+      <Text style={styles.title}>{t('settings.language')}</Text>
+      <View style={styles.soundsContainer}>
+        <View style={styles.soundsRow}>
+          <TouchableOpacity onPress={() => setLanguage('eng')}>
+            <Text style={[styles.soundsButton, checkActiveLanguage('eng')]}>
+              {t('settings.english')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.soundsRow}>
+          <TouchableOpacity onPress={() => setLanguage('sp')}>
+            <Text style={[styles.soundsButton, checkActiveLanguage('sp')]}>
+              {t('settings.spanish')}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

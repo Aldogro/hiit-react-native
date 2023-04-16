@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {validateInput} from '../utils';
 import LabeledInput from './LabeledInput';
 import {RoundsDataType} from './Main';
 import {FormItemStyles as styles} from '../Styles';
+import {TrainingContext} from '../TrainingProvider';
 
 const FormItem = ({
   data,
@@ -16,6 +17,7 @@ const FormItem = ({
   removeItem: (index: number) => void;
   modifyItem: (index: number, data: RoundsDataType) => void;
 }) => {
+  const {t} = useContext(TrainingContext);
   const [label, setLabel] = useState(data.label);
   const [workTime] = useState<number>(data.workTime);
   const [restTime] = useState<number>(data.restTime);
@@ -43,43 +45,45 @@ const FormItem = ({
     <View style={styles.container}>
       <View>
         <LabeledInput
-          label="Block Name"
+          label={t('createTrainingSession.blockName')}
           value={label}
           onChange={setLabel}
           keyboardType="default"
         />
         <View style={styles.halfScreen}>
           <LabeledInput
-            label="Work Min"
+            label={t('createTrainingSession.workMin')}
             value={validateInput(workMin, setWorkMin).toString()}
             onChange={setWorkMin}
           />
           <LabeledInput
-            label="Work Sec"
+            label={t('createTrainingSession.workSec')}
             value={validateInput(workSec, setWorkSec).toString()}
             onChange={setWorkSec}
           />
         </View>
         <View style={styles.halfScreen}>
           <LabeledInput
-            label="Rest Min"
+            label={t('createTrainingSession.restMin')}
             value={validateInput(restMin, setRestMin).toString()}
             onChange={setRestMin}
           />
           <LabeledInput
-            label="Rest Sec"
+            label={t('createTrainingSession.restSec')}
             value={validateInput(restSec, setRestSec).toString()}
             onChange={setRestSec}
           />
         </View>
         <LabeledInput
-          label="Rounds"
+          label={t('createTrainingSession.rounds')}
           value={validateInput(rounds, setRounds).toString()}
           onChange={(e: string) => setRounds(Number(e))}
         />
       </View>
       <TouchableOpacity onPress={() => removeItem(index)}>
-        <Text style={styles.deleteFormItem}>Delete Exercise</Text>
+        <Text style={styles.deleteFormItem}>
+          {t('createTrainingSession.delete')}
+        </Text>
       </TouchableOpacity>
     </View>
   );

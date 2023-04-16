@@ -1,11 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useEffect, useReducer} from 'react';
 import {reducer, initialState, Actions} from './reducer';
+import {eng, sp} from './utils/langs';
 
 export const TrainingContext = createContext<any>({});
 
 const TrainingProvider = ({children}: any): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const t = (word: string): string => {
+    const lang = state.selectedLanguage;
+    const langs: {eng: any; sp: any} = {eng, sp};
+    const namespaces = word.split('.');
+    return langs[lang as keyof typeof langs][namespaces[0]][namespaces[1]];
+  };
 
   useEffect(() => {
     (async () => {
@@ -36,6 +44,7 @@ const TrainingProvider = ({children}: any): JSX.Element => {
       value={{
         state,
         dispatch,
+        t,
       }}>
       {children}
     </TrainingContext.Provider>

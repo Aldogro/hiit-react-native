@@ -12,7 +12,7 @@ import {Actions} from '../reducer';
 import {routes} from '../utils/constants';
 
 const TrainingsListScreen = ({navigation}: {navigation: any}) => {
-  const {state, dispatch} = useContext(TrainingContext);
+  const {state, dispatch, t} = useContext(TrainingContext);
   const keys = Object.keys(state.savedTrainingSessions);
 
   const calculateTotalRounds = (trainingSession: RoundsDataType[]): number => {
@@ -26,9 +26,9 @@ const TrainingsListScreen = ({navigation}: {navigation: any}) => {
     );
   };
 
-  // const onRemoveItem = (item: string) => {
-  //   dispatch({type: Actions.REMOVE_TRAINING_SESSION, payload: item});
-  // };
+  const onRemoveItem = (item: string) => {
+    dispatch({type: Actions.REMOVE_TRAINING_SESSION, payload: item});
+  };
 
   const onSelectItem = (item: string) => {
     dispatch({
@@ -46,16 +46,17 @@ const TrainingsListScreen = ({navigation}: {navigation: any}) => {
               <TouchableOpacity onPress={() => onSelectItem(item)}>
                 <Text style={styles.summaryTitle}>{item}</Text>
                 <Text style={styles.summaryInfo}>
-                  Exercises: {state.savedTrainingSessions[item].length}
+                  {t('trainingsList.exercises')}:{' '}
+                  {state.savedTrainingSessions[item].length}
                 </Text>
                 <Text style={styles.summaryInfo}>
-                  Total time:{' '}
+                  {t('trainingsList.totalTime')}:{' '}
                   {formatTime(
                     calculateTotalTime(state.savedTrainingSessions[item]),
                   )}
                 </Text>
                 <Text style={styles.summaryInfo}>
-                  Rounds:{' '}
+                  {t('trainingsList.rounds')}:{' '}
                   {calculateTotalRounds(state.savedTrainingSessions[item])}
                 </Text>
               </TouchableOpacity>
@@ -67,9 +68,11 @@ const TrainingsListScreen = ({navigation}: {navigation: any}) => {
                     type: Actions.SAVE_TRAINING_SESSION,
                     payload: item,
                   });
-                  navigation.navigate(routes.TRAINING);
+                  navigation.navigate(t('titles.training'));
                 }}>
-                <Text style={[styles.button, styles.start]}>Start Now</Text>
+                <Text style={[styles.button, styles.start]}>
+                  {t('trainingsList.startNow')}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 disabled={state.savedTrainingSessions[item].length <= 0}
@@ -78,18 +81,16 @@ const TrainingsListScreen = ({navigation}: {navigation: any}) => {
                     type: Actions.SET_SELECTED_TRAINING_SESSION,
                     payload: item,
                   });
-                  navigation.navigate(routes.FORM);
+                  navigation.navigate(t('titles.createTrainingSession'));
                 }}>
-                <Text style={[styles.button, styles.edit]}>Edit</Text>
+                <Text style={[styles.button, styles.edit]}>
+                  {t('trainingsList.edit')}
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch({
-                    type: Actions.REMOVE_TRAINING_SESSION,
-                    payload: item,
-                  });
-                }}>
-                <Text style={[styles.button, styles.delete]}>Delete</Text>
+              <TouchableOpacity onPress={() => onRemoveItem(item)}>
+                <Text style={[styles.button, styles.delete]}>
+                  {t('trainingsList.delete')}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

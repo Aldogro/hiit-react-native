@@ -12,10 +12,9 @@ import FormItem from '../components/FormItem';
 import {FormStyles as styles} from '../Styles';
 import {TrainingContext} from '../TrainingProvider';
 import {Actions} from '../reducer';
-import {routes} from '../utils/constants';
 
 const FormScreen = ({navigation}: any) => {
-  const {state, dispatch} = useContext(TrainingContext);
+  const {state, dispatch, t} = useContext(TrainingContext);
   const [trainingSessionName, setTrainingSessionName] = useState(
     state.selectedTrainingSession,
   );
@@ -30,7 +29,7 @@ const FormScreen = ({navigation}: any) => {
 
   const handleAddFormItems = () => {
     const item: RoundsDataType = {
-      label: 'Exercise',
+      label: t('createTrainingSession.blockDefault'),
       workTime: 0,
       restTime: 0,
       rounds: 0,
@@ -46,7 +45,7 @@ const FormScreen = ({navigation}: any) => {
         session: formItems,
       },
     });
-    navigation.navigate(routes.TRAININGS_LIST);
+    navigation.navigate(t('titles.trainingList'));
   };
 
   const handleRemoveFormItem = (index: number) => {
@@ -66,7 +65,7 @@ const FormScreen = ({navigation}: any) => {
       <View style={styles.container}>
         <TextInput
           style={styles.sessionTrainingTitle}
-          placeholder="Training Session Name"
+          placeholder={t('createTrainingSession.tsNamePlaceholder')}
           value={trainingSessionName}
           onChangeText={setTrainingSessionName}
         />
@@ -83,7 +82,7 @@ const FormScreen = ({navigation}: any) => {
         <View style={styles.actionsWrapper}>
           <TouchableOpacity onPress={handleAddFormItems}>
             <Text style={[styles.button, styles.addExercise]}>
-              Add Exercise
+              {t('createTrainingSession.addExercise')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -100,7 +99,7 @@ const FormScreen = ({navigation}: any) => {
                   ? styles.start
                   : styles.disabled,
               ]}>
-              Save Training
+              {t('createTrainingSession.saveTraining')}
             </Text>
           </TouchableOpacity>
         </View>
