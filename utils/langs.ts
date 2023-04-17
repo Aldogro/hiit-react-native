@@ -28,10 +28,10 @@ export const eng = {
   },
   training: {
     addSomeRounds: 'Add some rounds first',
-    exerciseComplete: 'Ejercicio Completado!!!',
+    exerciseComplete: 'Exercise complete!!!',
     totalTime: 'Total Time',
-    work: 'Work',
-    rest: 'Rest',
+    work: 'Work!!',
+    rest: 'Rest!!',
     rounds: 'Rounds',
     of: 'of',
     start: 'Start',
@@ -80,6 +80,7 @@ export const sp = {
   },
   training: {
     addSomeRounds: 'Agregá unos rounds primero',
+    exerciseComplete: 'Ejercicio completado!!!',
     totalTime: 'Tiempo Total',
     work: 'Entrenar!!',
     rest: 'Descansar!!',

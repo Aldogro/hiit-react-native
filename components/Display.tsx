@@ -46,7 +46,7 @@ const Display = ({
         ]}>
         <Text style={styles.timeLeftLabel}>
           {!exerciseComplete &&
-            (isWorkTime ? t('training.work!!') : t('training.rest'))}
+            (isWorkTime ? t('training.work') : t('training.rest'))}
         </Text>
         <Text style={styles.timeLeft}>{formatTime(timeLeft)}</Text>
         <Text style={styles.roundsLeft}>
