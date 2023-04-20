@@ -43,8 +43,8 @@ const MainComponent = () => {
     setExerciseComplete(false);
     setIsWorkTime(true);
     setTotalTime(getTotalTime());
-    setRoundsLeft(data?.[current]?.rounds);
-    setTimeLeft(data?.[current]?.workTime);
+    setRoundsLeft(data?.[0]?.rounds);
+    setTimeLeft(data?.[0]?.workTime);
     setIsActive(false);
   };
 
@@ -55,10 +55,8 @@ const MainComponent = () => {
   }, [data, state]);
 
   useEffect(() => {
-    const halfWayWork =
-      Number((data?.[current]?.workTime / 2).toFixed(0)) === timeLeft;
-    const halfWayRest =
-      Number((data?.[current]?.restTime / 2).toFixed(0)) === timeLeft;
+    const halfWayWork = Number(data?.[current]?.workTime / 2) === timeLeft;
+    const halfWayRest = Number(data?.[current]?.restTime / 2) === timeLeft;
     if (isWorkTime && halfWayWork) {
       playSound('half_way');
     }
@@ -105,9 +103,9 @@ const MainComponent = () => {
         // Start timer if not already running
         setTimer(
           setInterval(() => {
-            setTimeLeft(_timeLeft => _timeLeft - 1);
-            setTotalTime(_totalTime => _totalTime - 1);
-          }, 1000),
+            setTimeLeft(_timeLeft => _timeLeft - 0.5);
+            setTotalTime(_totalTime => _totalTime - 0.5);
+          }, 500),
         );
       }
     } else {
@@ -141,6 +139,9 @@ const MainComponent = () => {
               isWorkTime={isWorkTime}
               exerciseComplete={exerciseComplete}
               timeLeft={timeLeft}
+              periodTotalTime={
+                data[current][isWorkTime ? 'workTime' : 'restTime']
+              }
               rounds={data[current].rounds}
               roundsLeft={roundsLeft}
               isActive={isActive}

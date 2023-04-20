@@ -50,29 +50,31 @@ export const MainStyles = StyleSheet.create({
 export const DisplayStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
   },
   name: {
+    marginTop: 20,
     fontSize: 30,
     fontWeight: 'bold',
   },
   label: {
     minWidth: '100%',
-    padding: 10,
     textAlign: 'center',
     fontSize: 25,
-    marginBottom: 16,
   },
   totalTime: {
-    padding: 10,
+    marginBottom: 40,
+    paddingTop: 10,
   },
   roundWrapper: {
     flex: 1,
-    maxHeight: 350,
+    backgroundColor: 'transparent',
+    maxHeight: 300,
     width: '100%',
     padding: 30,
-    marginBottom: 20,
+    marginBottom: 50,
+    marginTop: 30,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -87,8 +89,8 @@ export const DisplayStyles = StyleSheet.create({
   },
   timeLeft: {
     fontSize: 110,
+    lineHeight: 110,
     fontWeight: 'bold',
-    marginBottom: 16,
   },
   roundsLeft: {
     fontSize: 24,

@@ -3,6 +3,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {formatTime} from '../utils';
 import {DisplayStyles as styles} from '../Styles';
 import {TrainingContext} from '../TrainingProvider';
+import CircularDisplay from './CircularDisplay';
 
 type DisplayPropsType = {
   name: string;
@@ -12,6 +13,7 @@ type DisplayPropsType = {
   rounds: number;
   roundsLeft: number;
   timeLeft: number;
+  periodTotalTime: number;
   exerciseComplete: boolean;
   isActive: boolean;
   setIsActive: any;
@@ -25,6 +27,7 @@ const Display = ({
   isWorkTime,
   roundsLeft,
   timeLeft,
+  periodTotalTime,
   exerciseComplete,
   rounds,
   isActive,
@@ -34,16 +37,19 @@ const Display = ({
   const {t} = useContext(TrainingContext);
   return (
     <View style={styles.container}>
+      <CircularDisplay
+        radius={190}
+        strokeWidth={30}
+        progress={timeLeft}
+        totalValue={periodTotalTime}
+        isWorkTime={isWorkTime}
+      />
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.label}>{label}</Text>
       <Text style={styles.totalTime}>
         {t('training.totalTime')}: {formatTime(totalTime)}
       </Text>
-      <View
-        style={[
-          styles.roundWrapper,
-          isWorkTime ? styles.isWorkTime : styles.isRestTime,
-        ]}>
+      <View style={styles.roundWrapper}>
         <Text style={styles.timeLeftLabel}>
           {!exerciseComplete &&
             (isWorkTime ? t('training.work') : t('training.rest'))}
