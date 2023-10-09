@@ -8,6 +8,7 @@ export const DarkBackground = StyleSheet.create({
 
 export const MainStyles = StyleSheet.create({
   container: {
+    fontFamily: 'VarelaRound',
     flex: 1,
     backgroundColor: '#2c2c2c',
     gap: 12,
@@ -23,11 +24,12 @@ export const MainStyles = StyleSheet.create({
     gap: 20,
   },
   textComplete: {
+    fontFamily: 'VarelaRound',
     textAlign: 'center',
     fontSize: 25,
-    fontWeight: 'bold',
   },
   actionButton: {
+    fontFamily: 'VarelaRound',
     flex: 1,
     minWidth: 188,
     maxHeight: 60,
@@ -41,6 +43,7 @@ export const MainStyles = StyleSheet.create({
     alignContent: 'center',
   },
   reset: {
+    fontFamily: 'VarelaRound',
     color: 'tomato',
     borderColor: 'tomato',
     backgroundColor: '#ff634744',
@@ -56,14 +59,16 @@ export const DisplayStyles = StyleSheet.create({
   name: {
     marginTop: 20,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: 'VarelaRound',
   },
   label: {
+    fontFamily: 'VarelaRound',
     minWidth: '100%',
     textAlign: 'center',
     fontSize: 25,
   },
   totalTime: {
+    fontFamily: 'VarelaRound',
     marginBottom: 40,
     paddingTop: 10,
   },
@@ -86,15 +91,16 @@ export const DisplayStyles = StyleSheet.create({
   },
   timeLeftLabel: {
     fontSize: 35,
+    fontFamily: 'VarelaRound',
   },
   timeLeft: {
-    fontSize: 110,
+    fontSize: 100,
+    fontFamily: 'VarelaRound',
     lineHeight: 110,
-    fontWeight: 'bold',
   },
   roundsLeft: {
+    fontFamily: 'VarelaRound',
     fontSize: 24,
-    fontWeight: 'bold',
   },
   actionsContainer: {
     flex: 1,
@@ -107,6 +113,7 @@ export const DisplayStyles = StyleSheet.create({
     gap: 14,
   },
   actionButton: {
+    fontFamily: 'VarelaRound',
     flex: 1,
     minWidth: 188,
     textAlign: 'center',
@@ -152,6 +159,7 @@ export const InputStyles = StyleSheet.create({
     maxHeight: 60,
     fontSize: 15,
     textAlign: 'center',
+    fontFamily: 'VarelaRound',
   },
   button: {
     flex: 1,
@@ -163,9 +171,10 @@ export const InputStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
+    fontFamily: 'VarelaRound',
   },
   buttonText: {
-    fontWeight: 'bold',
+    fontFamily: 'VarelaRound',
     lineHeight: 15,
   },
 });
@@ -179,6 +188,7 @@ export const ShowValuesStyles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 30,
+    fontFamily: 'VarelaRound',
   },
   timerContainer: {
     maxHeight: 400,
@@ -194,12 +204,6 @@ export const ShowValuesStyles = StyleSheet.create({
     padding: 20,
     marginTop: 15,
     marginBottom: 15,
-  },
-  workTime: {
-    backgroundColor: 'tomato',
-  },
-  restTime: {
-    backgroundColor: 'teal',
   },
   roundTimer: {
     fontSize: 100,
@@ -219,6 +223,7 @@ export const FormStyles = StyleSheet.create({
     paddingBottom: 20,
   },
   sessionTrainingTitle: {
+    fontFamily: 'VarelaRound',
     borderWidth: 1,
     borderColor: 'white',
     margin: 8,
@@ -228,6 +233,7 @@ export const FormStyles = StyleSheet.create({
     padding: 12,
   },
   button: {
+    fontFamily: 'VarelaRound',
     flex: 1,
     minWidth: 390,
     textAlign: 'center',
@@ -283,6 +289,7 @@ export const FormItemStyles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 12,
+    fontFamily: 'VarelaRound',
   },
 });
 
@@ -293,6 +300,7 @@ export const LabeledInputStyles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
+    fontFamily: 'VarelaRound',
   },
   inputWrapper: {
     flex: 1,
@@ -300,12 +308,15 @@ export const LabeledInputStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    fontFamily: 'VarelaRound',
   },
   textInput: {
     flex: 1,
     backgroundColor: '#444444',
     borderRadius: 12,
     textAlign: 'center',
+    fontSize: 18,
+    fontFamily: 'VarelaRound',
   },
   iconButton: {
     textAlign: 'center',
@@ -315,6 +326,7 @@ export const LabeledInputStyles = StyleSheet.create({
     minWidth: 40,
     borderRadius: 30,
     fontSize: 14,
+    fontWeight: 'bold',
   },
 });
 
@@ -322,7 +334,7 @@ export const SettingsStyles = StyleSheet.create({
   title: {
     marginTop: 40,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: 'VarelaRound',
   },
   soundsContainer: {
     flex: 1,
@@ -345,6 +357,7 @@ export const SettingsStyles = StyleSheet.create({
     paddingTop: 28,
     fontSize: 14,
     minHeight: 80,
+    fontFamily: 'VarelaRound',
   },
   active: {
     backgroundColor: '#16611681',
@@ -375,6 +388,7 @@ export const TrainingListStyles = StyleSheet.create({
     borderRadius: 8,
     minWidth: 75,
     textAlign: 'center',
+    fontFamily: 'VarelaRound',
   },
   start: {
     backgroundColor: '#16611681',
@@ -402,11 +416,12 @@ export const TrainingListStyles = StyleSheet.create({
   },
   summaryTitle: {
     textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 24,
+    fontFamily: 'VarelaRound',
   },
   summaryInfo: {
     marginTop: 8,
     fontSize: 17,
+    fontFamily: 'VarelaRound',
   },
 });

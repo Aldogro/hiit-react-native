@@ -19,6 +19,7 @@ const Routes = () => {
           backgroundColor: 'black',
         },
         headerTitleStyle: {
+          fontFamily: 'VarelaRound',
           color: 'white',
         },
         tabBarActiveTintColor: 'white',

@@ -89,6 +89,17 @@ def reactNativeArchitectures() {
 }
 
 android {
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -126,7 +137,7 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
@@ -146,6 +157,11 @@ android {
 
         }
     }
+    project.ext.vectoricons = [
+        iconFontName: 'VarelaRound.ttf' // This is the name of your font file
+    ];
+
+    apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 }
 
 dependencies {
@@ -168,4 +184,3 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
